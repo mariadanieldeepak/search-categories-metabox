@@ -14,8 +14,20 @@ Domain Path: /languages
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-add_action( 'admin_menu', 'search_categories_metabox_menu' );
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-search-categories-metabox.php';
 
-function search_categories_metabox_menu() {
-    add_options_page( "Search Categories Metabox", "Search Categories Mb", "manage_options", "search-categories-metabox", "render_page");
+function run_search_categories_metabox() {
+
+    if( ! isset( $search_categories_metabox ) ) {
+        $search_categories_metabox = new Search_Categories_Metabox( __FILE__ );
+    }
+    $search_categories_metabox->run();
+
 }
+
+run_search_categories_metabox();
+
