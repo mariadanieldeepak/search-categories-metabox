@@ -1,6 +1,4 @@
 .scm-categories-panel {
-    /*min-height: 42px;
-    max-height: 200px;*/
     border: 1px solid #ddd;
     height: 200px;
     overflow: auto;
