@@ -106,7 +106,7 @@
         function displayError() {
             var errorMessage;
 
-            if ( typeof ajax_object.something_wrong_error_message != 'undefined' ) {
+            if ( $.type( ajax_object.something_wrong_error_message ) != 'undefined' ) {
                 errorMessage = ajax_object.something_wrong_error_message;
             } else {
                 errorMessage = 'Something went wrong.';
@@ -135,19 +135,19 @@
                     security  : ajax_object.ajax_nonce,
                     post_id   : ajax_object.post_id
                 }
-            }).success(function( data ) {
+            }).success(function( response ) {
 
-                var jsonResult = data;
+                var jsonResult = response.data;
 
-                if ( jsonResult.success ) {
+                if ( response.success ) {
                     if( '' != jsonResult.category_list ) {
                         $( 'ul#scm-categories-ul' ).html( jsonResult.category_list );
                     } else {
                         // Error message to display when no results are found.
                         var noResultsFound;
 
-                        if ( typeof ajax_object.no_results_error_message != 'undefined' ) {
-                            noResultsFound = ajax_object.no_results;
+                        if ( $.type( ajax_object.no_results_error_message ) != 'undefined' ) {
+                            noResultsFound = ajax_object.no_results_error_message;
                         } else {
                             noResultsFound = 'No results found.';
                         }
