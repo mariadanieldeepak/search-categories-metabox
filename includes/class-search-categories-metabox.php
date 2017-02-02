@@ -247,23 +247,6 @@ class Search_Categories_Metabox {
     }
 
     /**
-     * Adds the options page in the Admin Dashboard.
-     *
-     * @since 0.1.0
-     */
-    public function add_admin_menu() {
-
-        add_options_page(
-            __( 'Search Categories Metabox', 'search-categories-metabox' ),
-            __( 'Search Categories Mb', 'search-categories-metabox' ),
-            'manage_options',
-            Search_Categories_Metabox::PLUGIN_SLUG,
-            array( $this, 'render_search_categories_metabox_page' )
-        );
-
-    }
-
-    /**
      * Removes the default `Category` metabox from the WordPress editor.
      *
      * @since 0.1.0
@@ -281,7 +264,6 @@ class Search_Categories_Metabox {
      */
     public function define_admin_hooks() {
         add_action( 'admin_init', array( $this, 'remove_default_categories_metabox' ) );
-        add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_styles' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
         add_action( 'wp_ajax_search_categories', array( $this, 'search_categories_callback' ) );
