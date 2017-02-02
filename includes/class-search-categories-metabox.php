@@ -227,7 +227,7 @@ class Search_Categories_Metabox {
 
         global $post;
 
-        wp_enqueue_script( 'admin_post_editor_script', plugin_dir_url( $this->plugin_file ) . 'assets/js/admin-script.js', array( 'jquery' ), $this->plugin_version );
+        wp_enqueue_script( 'admin_post_editor_script', plugin_dir_url( $this->plugin_file ) . 'assets/js/search-categories-metabox.js', array( 'jquery' ), $this->plugin_version );
 
         wp_localize_script( 'admin_post_editor_script', 'ajax_object', array(
             'ajax_url'   => admin_url( 'admin-ajax.php' ),
