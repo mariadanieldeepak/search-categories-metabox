@@ -26,7 +26,7 @@ class Search_Categories_Metabox {
      * Search_Categories_Metabox constructor.
      * @param $file
      */
-    function __construct( $file ) {
+    public function __construct( $file ) {
         $this->plugin_file = $file;
     }
 
@@ -34,11 +34,12 @@ class Search_Categories_Metabox {
      * Gets the Post taxonomy Category slug by Post ID.
      *
      * @since 0.1.0
+     * @access private
      *
      * @param $post_id
      * @return array
      */
-    function _get_post_taxonomy( $post_id ) {
+    private function get_post_taxonomy( $post_id ) {
         $taxonomy = get_post_taxonomies( $post_id );
         $taxonomy = $taxonomy[0];
         return $taxonomy;
@@ -49,10 +50,10 @@ class Search_Categories_Metabox {
      *
      * @since 0.1.0
      */
-    function save_post_categories() {
+    public function save_post_categories() {
         global $post;
 
-        $post_taxonomy       = $this->_get_post_taxonomy( $post->ID );
+        $post_taxonomy       = $this->get_post_taxonomy( $post->ID );
         $selected_categories = $_POST['post-category'];
         if ( isset( $selected_categories ) && ! empty( $selected_categories ) ) {
             $selected_categories = array_map( 'intval', $selected_categories );
@@ -79,7 +80,7 @@ class Search_Categories_Metabox {
          * Get only Category taxonomy
          * Refer https://codex.wordpress.org/Function_Reference/get_post_taxonomies
          */
-        $taxonomy   = $this->_get_post_taxonomy();
+        $taxonomy   = $this->get_post_taxonomy();
 
         $args = array(
             'hide_empty' => false,
@@ -120,7 +121,7 @@ class Search_Categories_Metabox {
             <?php
             global $post;
             $categories = $this->_get_taxonomy_categories();
-            $post_taxonomy = $this->_get_post_taxonomy( $post->ID );
+            $post_taxonomy = $this->get_post_taxonomy( $post->ID );
             $post_categories = get_the_terms( $post->ID, $post_taxonomy );
             $post_categories = array_column( $post_categories, 'term_id' );
             foreach( $categories as $category ) :
