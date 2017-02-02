@@ -24,7 +24,8 @@
         function sortCategoriesListBySelectedItems() {
 
             var selectedCategories = [],
-                otherCategories    = [];
+                otherCategories    = [],
+                checkBoxState;
 
             $( 'ul#scm-categories-ul li' ).each(function () {
                 checkBoxState = $( this ).find( 'input' ).prop( 'checked' );
