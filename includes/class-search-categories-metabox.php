@@ -8,11 +8,6 @@ class Search_Categories_Metabox {
     CONST PLUGIN_SLUG = 'search-categories-metabox';
 
     /**
-     * @const TEXT_DOMAIN
-     */
-    CONST TEXT_DOMAIN = 'search-categories-metabox';
-
-    /**
      * @var string $plugin_file
      */
     protected $plugin_file;
@@ -211,8 +206,8 @@ class Search_Categories_Metabox {
             'ajax_url'                      => admin_url( 'admin-ajax.php' ),
             'ajax_nonce'                    => wp_create_nonce( "search-categories-metabox" ),
             'post_id'                       => $post->ID,
-            'no_results_error_message'      => __( 'No results found.', self::TEXT_DOMAIN ),
-            'something_wrong_error_message' => __( 'Something went wrong.', self::TEXT_DOMAIN )
+            'no_results_error_message'      => __( 'No results found.', 'search-categories-metabox' ),
+            'something_wrong_error_message' => __( 'Something went wrong.', 'search-categories-metabox' )
         ) );
 
     }
@@ -259,8 +254,8 @@ class Search_Categories_Metabox {
     public function add_admin_menu() {
 
         add_options_page(
-            __( 'Search Categories Metabox', Search_Categories_Metabox::TEXT_DOMAIN ),
-            __( 'Search Categories Mb', Search_Categories_Metabox::TEXT_DOMAIN ),
+            __( 'Search Categories Metabox', 'search-categories-metabox' ),
+            __( 'Search Categories Mb', 'search-categories-metabox' ),
             'manage_options',
             Search_Categories_Metabox::PLUGIN_SLUG,
             array( $this, 'render_search_categories_metabox_page' )
