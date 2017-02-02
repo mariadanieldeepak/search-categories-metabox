@@ -129,7 +129,7 @@ class Search_Categories_Metabox {
             ?>
                 <li id='<?php echo $category->term_id; ?>'>
                     <label class="selecttit">
-                        <input id='in-category-<?php echo $category->term_id; ?>' class="scm-category-list-item" value=<?php echo $category->term_id; ?> name="post-category[]" type="checkbox" <?php if ( $is_post_in_category ) { echo 'checked="checked"'; } ?>> <?php echo $category->name; ?>
+                        <input id='in-category-<?php echo $category->term_id; ?>' class="scm-category-list-item" value=<?php echo $category->term_id; ?> name="post-category[]" type="checkbox" <?php if ( $is_post_in_category ) { echo 'checked="checked"'; } ?>> <?php echo esc_html( $category->name ); ?>
                     </label>
                 </li>
             <?php
