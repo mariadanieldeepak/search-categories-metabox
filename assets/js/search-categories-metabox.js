@@ -77,7 +77,7 @@
              * When user deselects, remove the item from
              * global selectedCategories
              */
-            if ( checkBoxState == false ) {
+            if ( false === checkBoxState ) {
                 if ( selectedCategories.length > 0 && $.inArray( checkBoxVal, selectedCategories ) !== -1 ) {
                     selectedCategories = $.grep(selectedCategories, function( a ) {
                         return a !== checkBoxVal;
