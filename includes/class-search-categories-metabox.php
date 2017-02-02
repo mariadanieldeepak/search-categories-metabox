@@ -71,7 +71,7 @@ class Search_Categories_Metabox {
      * @param string $search_term
      * @return array
      */
-    protected function _get_taxonomy_categories( $search_term = '' ) {
+    protected function get_taxonomy_categories( $search_term = '' ) {
         $categories = array();
         $args       = array();
         $taxonomy   = array();
@@ -120,7 +120,7 @@ class Search_Categories_Metabox {
             <ul id="scm-categories-ul">
             <?php
             global $post;
-            $categories = $this->_get_taxonomy_categories();
+            $categories = $this->get_taxonomy_categories();
             $post_taxonomy = $this->get_post_taxonomy( $post->ID );
             $post_categories = get_the_terms( $post->ID, $post_taxonomy );
             $post_categories = array_column( $post_categories, 'term_id' );
@@ -187,9 +187,9 @@ class Search_Categories_Metabox {
         $post_id             = $_POST['post_id'];
 
         if( isset( $search_query ) && ! is_null( $search_query ) ) {
-            $categories = $this->_get_taxonomy_categories( $search_query );
+            $categories = $this->get_taxonomy_categories( $search_query );
         } else {
-            $categories = $this->_get_taxonomy_categories();
+            $categories = $this->get_taxonomy_categories();
         }
 
         $result['category_list'] = '';
