@@ -158,7 +158,7 @@ class Search_Categories_Metabox {
         check_ajax_referer( 'search-categories-metabox', 'security' );
 
         $search_query        = isset( $_POST['query'] ) ? sanitize_text_field( $_POST['query'] ) : '';
-        $selected_categories = ( isset( $_POST['categories'] ) && ! empty( $selected_categories ) ) ? $_POST['categories'] : array();
+        $selected_categories = ( isset( $_POST['categories'] ) && ! empty( $_POST['categories'] ) ) ? $_POST['categories'] : array();
         $result              = [];
         $post_id             = $_POST['post_id'];
 
