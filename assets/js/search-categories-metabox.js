@@ -1,9 +1,6 @@
 /* global selectedCategories:true */
 
-(function($) {
-
-	// $ Works! You can test it with next line if you like
-	// console.log($);
+(function( $ ) {
 
 	$( 'document' ).ready(function() {
 
@@ -171,10 +168,10 @@
 		 * Clear the search term when the `Clear` button is clicked.
 		 * Trigger the keyup function after clearing, to retrieve all applicable Categories.
 		 */
-		$('#scm-search-clear').click(function(event){
+		$('#scm-search-clear').click(function( event ) {
 			event.preventDefault();
-			$('#scm-search-categories-search').val('');
-			$('#scm-search-categories-search').keyup();
+			$( '#scm-search-categories-search' ).val('');
+			$( '#scm-search-categories-search' ).keyup();
 		});
 
 		/*
