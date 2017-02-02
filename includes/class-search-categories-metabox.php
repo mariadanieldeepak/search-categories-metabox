@@ -240,7 +240,7 @@ class Search_Categories_Metabox {
 
             <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
-            <form action='<?php echo esc_html( $_SERVER['REQUEST_URI'] ); ?>' method='POST'>
+            <form action='<?php echo esc_attr( admin_url( 'options-general.php?page=' ) . self::PLUGIN_SLUG ); ?>' method='POST'>
                 <?php
                 submit_button( 'Save Settings' );
                 ?>
