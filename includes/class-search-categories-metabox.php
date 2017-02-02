@@ -40,8 +40,8 @@ class Search_Categories_Metabox {
      * @return array
      */
     private function get_post_taxonomy( $post_id ) {
-        $taxonomy = get_post_taxonomies( $post_id );
-        $taxonomy = $taxonomy[0];
+        $taxonomies = get_post_taxonomies( $post_id );
+        $taxonomy   = $taxonomies[0];
         return $taxonomy;
     }
 
