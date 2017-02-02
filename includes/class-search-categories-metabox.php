@@ -139,25 +139,6 @@ class Search_Categories_Metabox {
 
         </div>
 
-
-        <!--
-        <div id="category-adder" class="">
-            <a id="scm-category-add-toggle" href="#category-add" class="taxonomy-add-new">
-                + Add New Category</a>
-            <p id="scm-category-add" class="category-add wp-hidden-child">
-                <label class="screen-reader-text" for="newcategory">Add New Category</label>
-                <input name="newcategory" id="newcategory" class="form-required" value="New Category Name" aria-required="true" type="text">
-                <label class="screen-reader-text" for="newcategory_parent">
-                    Parent Category: </label>
-                <select name="newcategory_parent" id="newcategory_parent" class="postform">
-                    <option class="level-0" value="1">Uncategorized</option>
-                </select>
-                <input id="category-add-submit" data-wp-lists="add:categorychecklist:category-add" class="button category-add-submit" value="Add New Category" type="button">
-                <input id="_ajax_nonce-add-category" name="_ajax_nonce-add-category" value="d68b600aac" type="hidden"><span id="category-ajax-response"></span>
-            </p>
-        </div>
-        -->
-
     <?php
     }
 
