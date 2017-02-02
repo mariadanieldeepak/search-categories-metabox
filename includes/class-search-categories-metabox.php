@@ -214,7 +214,7 @@ class Search_Categories_Metabox {
         }
 
         //echo json_encode( 'Daniel' );
-        wp_send_json( $result );
+        wp_send_json_success( $result );
         wp_die();
     }
 
@@ -230,9 +230,11 @@ class Search_Categories_Metabox {
         wp_enqueue_script( 'admin_post_editor_script', plugin_dir_url( $this->plugin_file ) . 'assets/js/search-categories-metabox.js', array( 'jquery' ), $this->plugin_version );
 
         wp_localize_script( 'admin_post_editor_script', 'ajax_object', array(
-            'ajax_url'   => admin_url( 'admin-ajax.php' ),
-            'ajax_nonce' => wp_create_nonce( "search-categories-metabox" ),
-            'post_id'    => $post->ID,
+            'ajax_url'                      => admin_url( 'admin-ajax.php' ),
+            'ajax_nonce'                    => wp_create_nonce( "search-categories-metabox" ),
+            'post_id'                       => $post->ID,
+            'no_results_error_message'      => __( 'No results found.', self::TEXT_DOMAIN ),
+            'something_wrong_error_message' => __( 'Something went wrong.', self::TEXT_DOMAIN )
         ) );
 
     }

@@ -96,6 +96,27 @@
             }
         });
 
+        /**
+         * @summary Displays error message in Search Categories Metabox.
+         *
+         * @since 0.1.0
+         *
+         * @global array selectedCategories List of selected Categories ID.
+         */
+        function displayError() {
+            var errorMessage;
+
+            if ( typeof ajax_object.something_wrong_error_message != 'undefined' ) {
+                errorMessage = ajax_object.something_wrong_error_message;
+            } else {
+                errorMessage = 'Something went wrong.';
+            }
+
+            $( 'ul#scm-categories-ul' ).html( '<li>' + errorMessage  + '</li>' );
+            // Reset Selected Categories.
+            selectedCategories = [];
+        }
+
         /*
          * When user types on the search box,
          * retrieve categories based on the search term.
@@ -118,18 +139,30 @@
 
                 var jsonResult = data;
 
-                if( '' != jsonResult.category_list ) {
-                    $( 'ul#scm-categories-ul' ).html( jsonResult.category_list );
+                if ( jsonResult.success ) {
+                    if( '' != jsonResult.category_list ) {
+                        $( 'ul#scm-categories-ul' ).html( jsonResult.category_list );
+                    } else {
+                        // Error message to display when no results are found.
+                        var noResultsFound;
+
+                        if ( typeof ajax_object.no_results_error_message != 'undefined' ) {
+                            noResultsFound = ajax_object.no_results;
+                        } else {
+                            noResultsFound = 'No results found.';
+                        }
+
+                        $( 'ul#scm-categories-ul' ).html( '<li>' + noResultsFound  + '</li>' );
+                    }
+                    sortCategoriesListBySelectedItems();
                 } else {
-                    //$('ul#scm-categories-ul').html('No results found.');
-                    $( 'ul#scm-categories-ul' ).html( '<li>No results found.</li>' );
+                    // If AJAX fails to set JSON success, then display error.
+                    displayError();
                 }
-                sortCategoriesListBySelectedItems();
 
             }).error(function() {
-                var errorMessage = '<li>Something went wrong.</li>';
-                $( 'ul#scm-categories-ul' ).html( errorMessage );
-                selectedCategories = [];
+                // If AJAX request fails to send response, then display error.
+                displayError();
             });
 
         });
