@@ -22,10 +22,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-search-categories-metabox.
 
 function run_search_categories_metabox() {
 
-    if( ! isset( $search_categories_metabox ) ) {
-        $search_categories_metabox = new Search_Categories_Metabox( __FILE__ );
-    }
-    $search_categories_metabox->run();
+	if( ! isset( $search_categories_metabox ) ) {
+		$search_categories_metabox = new Search_Categories_Metabox( __FILE__ );
+	}
+	$search_categories_metabox->run();
 
 }
 
