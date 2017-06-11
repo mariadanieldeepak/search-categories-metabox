@@ -120,7 +120,10 @@
 		 */
 		$( '#scm-search-categories-search' ).keyup(function() {
 
-			var searchQuery = $( this ).val();
+			var searchQuery = $( this ).val(),
+				liNoResults,
+				jsonResult,
+				noResultsFoundMessage;
 
 			$.ajax({
 				method: "POST",
@@ -134,22 +137,18 @@
 				}
 			}).success(function( response ) {
 
-				var jsonResult = response.data;
+				jsonResult = response.data;
 
 				if ( response.success ) {
 					if( '' != jsonResult.category_list ) {
 						$( 'ul#scm-categories-ul' ).html( jsonResult.category_list );
 					} else {
 						// Error message to display when no results are found.
-						var noResultsFound;
+						noResultsFoundMessage = ajax_object.no_results_error_message;
 
-						if ( $.type( ajax_object.no_results_error_message ) != 'undefined' ) {
-							noResultsFound = ajax_object.no_results_error_message;
-						} else {
-							noResultsFound = 'No results found.';
-						}
-
-						$( 'ul#scm-categories-ul' ).html( '<li>' + noResultsFound  + '</li>' );
+						liNoResults = $( 'ul#scm-categories-ul' ).add( 'li' );
+						liNoResults = liNoResults.text( noResultsFoundMessage );
+						$( 'ul#scm-categories-ul' ).html( noResultsFoundMessage );
 					}
 					sortCategoriesListBySelectedItems();
 				} else {
