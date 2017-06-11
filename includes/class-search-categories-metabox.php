@@ -118,7 +118,11 @@ class Search_Categories_Metabox {
 			$categories = $this->get_taxonomy_categories();
 			$post_taxonomy = $this->get_post_taxonomy( $post->ID );
 			$post_categories = get_the_terms( $post->ID, $post_taxonomy );
-			$post_categories = array_column( $post_categories, 'term_id' );
+			$pc              = array();
+			foreach ( $post_categories as $post_category ) {
+				$pc[] = $post_category->term_id;
+			}
+			$post_categories = $pc;
 			foreach( $categories as $category ) :
 				$is_post_in_category = in_array( $category->term_id, $post_categories, true );
 			?>
