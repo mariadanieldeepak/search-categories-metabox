@@ -1,0 +1,17 @@
+.scm-categories-panel {
+	border: 1px solid #ddd;
+	height: 200px;
+	overflow: auto;
+	padding: 0 .9em;
+}
+
+#scm-search-categories-search {
+	width: 180px;
+	float: left;
+	height: 28px;
+	margin: 0 4px 0 0;
+}
+
+.scm-search-clear {
+	padding-left: 5px;
+}
