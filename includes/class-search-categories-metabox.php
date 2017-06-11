@@ -61,21 +61,18 @@ class Search_Categories_Metabox {
 	 * Gets the array of categories.
 	 *
 	 * @since 0.1.0
-	 * @access private
 	 *
 	 * @param string $search_term
+	 * @param int    $post_id
 	 * @return array
 	 */
-	protected function get_taxonomy_categories( $search_term = '' ) {
-		$categories = array();
-		$args       = array();
-		$taxonomy   = array();
+	protected function get_taxonomy_categories( $search_term = '', $post_id ) {
 
 		/*
 		 * Get only Category taxonomy
 		 * Refer https://codex.wordpress.org/Function_Reference/get_post_taxonomies
 		 */
-		$taxonomy   = $this->get_post_taxonomy();
+		$taxonomy   = $this->get_post_taxonomy( $post_id );
 
 		$args = array(
 			'hide_empty' => false,
@@ -93,9 +90,7 @@ class Search_Categories_Metabox {
 
 			$args = wp_parse_args( $additional_args, $args );
 		}
-
-		$categories = get_categories( $args );
-		return $categories;
+		return get_categories( $args );
 	}
 
 	/**
@@ -108,14 +103,14 @@ class Search_Categories_Metabox {
 
 		<p>
 			<input id="scm-search-categories-search" type="text" name="scm-search-categories-search" size="16" />
-			<input type="button" class="button" id="scm-search-clear" value="Clear" />
+			<input type="button" class="button" id="scm-search-clear" value="<?php __( 'Clear', 'search-categories-metabox' ) ?>" />
 		</p>
 
 		<div class="scm-categories-panel">
 			<ul id="scm-categories-ul">
 			<?php
 			global $post;
-			$categories = $this->get_taxonomy_categories();
+			$categories = $this->get_taxonomy_categories( '', $post->ID );
 			$post_taxonomy = $this->get_post_taxonomy( $post->ID );
 			$post_categories = get_the_terms( $post->ID, $post_taxonomy );
 			$pc              = array();
@@ -148,7 +143,7 @@ class Search_Categories_Metabox {
 	 */
 	public function add_search_categories_metabox() {
 
-		add_meta_box( 'searchcategorydiv', 'Categories', array( $this, 'search_category_div_callback' ), 'post', 'side', 'default', null );
+		add_meta_box( 'searchcategorydiv', __( 'Categories', 'search-categories-metabox' ), array( $this, 'search_category_div_callback' ), 'post', 'side', 'default', null );
 
 	}
 
@@ -164,12 +159,12 @@ class Search_Categories_Metabox {
 		$search_query        = isset( $_POST['query'] ) ? sanitize_text_field( $_POST['query'] ) : '';
 		$selected_categories = ( isset( $_POST['categories'] ) && ! empty( $_POST['categories'] ) ) ? $_POST['categories'] : array();
 		$result              = [];
-		$post_id             = $_POST['post_id'];
+		$post_id             = absint( $_POST['post_id'] );
 
 		if( isset( $search_query ) && ! is_null( $search_query ) ) {
-			$categories = $this->get_taxonomy_categories( $search_query );
+			$categories = $this->get_taxonomy_categories( $search_query, $post_id );
 		} else {
-			$categories = $this->get_taxonomy_categories();
+			$categories = $this->get_taxonomy_categories( $search_query, $post_id );
 		}
 
 		$result['category_list'] = '';
@@ -190,7 +185,6 @@ class Search_Categories_Metabox {
 			$result['category_list'] = ob_get_clean();
 		}
 
-		//echo json_encode( 'Daniel' );
 		wp_send_json_success( $result );
 		wp_die();
 	}
@@ -241,7 +235,7 @@ class Search_Categories_Metabox {
 
 			<form action='<?php echo esc_attr( admin_url( 'options-general.php?page=' ) . self::PLUGIN_SLUG ); ?>' method='POST'>
 				<?php
-				submit_button( 'Save Settings' );
+				submit_button( __( 'Save Settings', 'search-categories-metabox' ) );
 				?>
 			</form>
 

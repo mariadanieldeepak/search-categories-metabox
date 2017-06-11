@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Search Categories Metabox
-Plugin URI:  https://developer.wordpress.org/plugins/the-basics/
+Plugin URI:  https://mariadanieldeepak.com/wordpress/search-categories-metabox/
 Description: This plugin includes a search field to the Categories Metabox in the WordPress Editor.
 Version:     0.1.0
 Author:      Maria Daniel Deepak
@@ -21,13 +21,10 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 require plugin_dir_path( __FILE__ ) . 'includes/class-search-categories-metabox.php';
 
 function run_search_categories_metabox() {
-
 	if( ! isset( $search_categories_metabox ) ) {
 		$search_categories_metabox = new Search_Categories_Metabox( __FILE__ );
 	}
 	$search_categories_metabox->run();
-
 }
 
-run_search_categories_metabox();
-
+add_action( 'plugins_loaded', 'run_search_categories_metabox' );
